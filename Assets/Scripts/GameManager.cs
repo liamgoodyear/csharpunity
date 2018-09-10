@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour {
 
     public void StartGame()
     {
+        PlayerController.instance.StartGame();
         SetGameState(GameState.inGame);
     }
 

@@ -8,7 +8,7 @@ public class KillTrigger : MonoBehaviour {
     {
         if(collision.tag == "Player")
         {
-            Debug.Log("Player Collider enteted the trigger");
+            PlayerController.instance.Kill();
         }
     }
 }

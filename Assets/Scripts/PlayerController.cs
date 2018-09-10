@@ -3,16 +3,25 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-
+    public static PlayerController instance;
     public float jumpForce = 25f;
     public float runningSpeed = 1.5f;
-    private Rigidbody2D rb2d;
     public Animator animator;
+
+    private Rigidbody2D rb2d;
+    private Vector3 startingPosition;
 
     private void Awake()
     {
-        animator.SetBool("isAlive", true);
+        instance = this;
+        startingPosition = this.transform.position;
         rb2d = GetComponent<Rigidbody2D>();
+    }
+
+    public void StartGame()
+    {
+        animator.SetBool("isAlive", true);
+        this.transform.position = startingPosition;
     }
 
     private void Update()
@@ -58,5 +67,11 @@ public class PlayerController : MonoBehaviour
         {          
             return false;
         }
+    }
+
+    public void Kill()
+    {
+        GameManager.instance.GameOver();
+        animator.SetBool("isAlive", false);
     }
 }
