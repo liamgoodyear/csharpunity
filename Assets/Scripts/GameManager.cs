@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour {
 
     public GameState currentGameState = GameState.menu;
     public static GameManager instance;
+   
+    public Canvas menuCanvas;
+    public Canvas inGameCanvas;
+    public Canvas gameOverCanvas;
 
     private void Awake()
     {
@@ -20,7 +24,6 @@ public class GameManager : MonoBehaviour {
     }
     private void Start()
     {
-        // StartGame();
         currentGameState = GameState.menu;
     }
 
@@ -34,6 +37,8 @@ public class GameManager : MonoBehaviour {
 
     public void StartGame()
     {
+        LevelGenerator.instance.RemoveAllPieces();
+        LevelGenerator.instance.GenerateInitialPieces();
         PlayerController.instance.StartGame();
         SetGameState(GameState.inGame);
     }
@@ -41,6 +46,7 @@ public class GameManager : MonoBehaviour {
     public void GameOver()
     {
         SetGameState(GameState.gameOver);
+        LevelGenerator.instance.RemoveAllPieces();
     }
 
     public void BackToMenu()
@@ -52,15 +58,21 @@ public class GameManager : MonoBehaviour {
     {
         if(newGameState == GameState.menu)
         {
-
+            menuCanvas.enabled = true;
+            inGameCanvas.enabled = false;
+            gameOverCanvas.enabled = false;
         }
         else if(newGameState == GameState.inGame)
         {
-
+            menuCanvas.enabled = false;
+            inGameCanvas.enabled = true;
+            gameOverCanvas.enabled = false;
         }
         else if(newGameState == GameState.gameOver)
         {
-
+            menuCanvas.enabled = false;
+            inGameCanvas.enabled = false;
+            gameOverCanvas.enabled = true;
         }
 
         currentGameState = newGameState;

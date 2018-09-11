@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
     public void StartGame()
     {
+        rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
         animator.SetBool("isAlive", true);
         this.transform.position = startingPosition;
     }
