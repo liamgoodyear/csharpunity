@@ -64,11 +64,11 @@ public class LevelGenerator : MonoBehaviour {
     {
         LevelPiece currentPiece;
 
-        for(int i = 0; i < pieces.Count -1; i++)
+        for(int i = 0; i < pieces.Count; i++)
         {
             currentPiece = pieces[i];
-            pieces.Remove(pieces[i]);
             Destroy(currentPiece.gameObject);
         }
+        pieces.Clear();
     }
 }

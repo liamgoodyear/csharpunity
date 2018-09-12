@@ -9,14 +9,17 @@ public enum GameState
     gameOver
 }
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
     public GameState currentGameState = GameState.menu;
     public static GameManager instance;
-   
+
     public Canvas menuCanvas;
     public Canvas inGameCanvas;
     public Canvas gameOverCanvas;
+
+    public int collectedCoins = 0;
 
     private void Awake()
     {
@@ -29,7 +32,7 @@ public class GameManager : MonoBehaviour {
 
     private void Update()
     {
-        if(Input.GetButtonDown("s"))
+        if (Input.GetButtonDown("s"))
         {
             StartGame();
         }
@@ -56,19 +59,19 @@ public class GameManager : MonoBehaviour {
 
     void SetGameState(GameState newGameState)
     {
-        if(newGameState == GameState.menu)
+        if (newGameState == GameState.menu)
         {
             menuCanvas.enabled = true;
             inGameCanvas.enabled = false;
             gameOverCanvas.enabled = false;
         }
-        else if(newGameState == GameState.inGame)
+        else if (newGameState == GameState.inGame)
         {
             menuCanvas.enabled = false;
             inGameCanvas.enabled = true;
             gameOverCanvas.enabled = false;
         }
-        else if(newGameState == GameState.gameOver)
+        else if (newGameState == GameState.gameOver)
         {
             menuCanvas.enabled = false;
             inGameCanvas.enabled = false;
@@ -76,5 +79,10 @@ public class GameManager : MonoBehaviour {
         }
 
         currentGameState = newGameState;
+    }
+
+    public void CollectedCoin()
+    {
+        collectedCoins++;
     }
 }
